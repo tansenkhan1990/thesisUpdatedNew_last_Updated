@@ -1,0 +1,140 @@
+Model Parameters:
+######################
+Kinship:
+
+RotatE:
+lr = 0.1, lam = 0.01, lam2 = 0.001, lam3 = 0.01, dim = 200, negsample_num = 10, gamma = 10, temp = 0, epoch = 100
+
+Without Grounding
+
+Mean Rank: 9, 2
+Mean RR: 0.1913, 0.7706
+Hit@1: 0.0424, 0.6466
+Hit@3: 0.1592, 0.8799
+Hit@5: 0.2956, 0.9367
+Hit@10: 0.6504, 0.9758
+
+With Grounding
+
+Mean Rank: 9, 2
+Mean RR: 0.1967, 0.7659
+Hit@1: 0.0433, 0.6350
+Hit@3: 0.1695, 0.8804
+Hit@5: 0.3138, 0.9344
+Hit@10: 0.6564, 0.9767
+#########################
+TransE:
+lr = 0.1, lam = 0.01, lam2 = 0.01, lam3 = 0.001, dim = 200, negsample_num = 10, gamma = 10, temp = 0, epoch = 200
+
+Without Grounding
+
+Mean Rank: 16, 10
+Mean RR: 0.1301, 0.2636
+Hit@1: 0.0065, 0.0242
+Hit@3: 0.0954, 0.3818
+Hit@5: 0.2067, 0.5633
+Hit@10: 0.4502, 0.7407
+
+With Grounding
+
+Mean Rank: 16, 10
+Mean RR: 0.1305, 0.2602
+Hit@1: 0.0065, 0.0149
+Hit@3: 0.0992, 0.4041
+Hit@5: 0.1974, 0.5601
+Hit@10: 0.4465, 0.7528
+#########################
+ComplEx
+
+lr = 0.1, lam = 0.01, lam2 = 0.3, lam3 = 0.001, dim = 200, negsample_num = 10, gamma = 10, temp = 0, epoch = 200
+
+Without Grounding
+
+Mean Rank: 11, 3
+Mean RR: 0.1347, 0.7443
+Hit@1: 0.0121, 0.6201
+Hit@3: 0.0777, 0.8357
+Hit@5: 0.1718, 0.9129
+Hit@10: 0.5102, 0.9632
+
+
+With Grounding
+
+Mean Rank: 11, 3
+Mean RR: 0.1378, 0.7562
+Hit@1: 0.0140, 0.6355
+Hit@3: 0.0843, 0.8561
+Hit@5: 0.1685, 0.9041
+Hit@10: 0.5116, 0.9572
+###########################
+Distmult
+
+lr = 0.5, lam = 0.01, lam2 = 0.3, lam3 = 0.001, dim = 200, negsample_num = 10, gamma = 24, temp = 0, epoch = 200
+
+Without Grounding
+
+Mean Rank: 18, 10
+Mean RR: 0.1263, 0.3622
+Hit@1: 0.0270, 0.2202
+Hit@3: 0.0875, 0.3915
+Hit@5: 0.1648, 0.5009
+Hit@10: 0.3450, 0.7128
+
+With Grounding
+
+Mean Rank: 17, 9
+Mean RR: 0.1492, 0.3807
+Hit@1: 0.0372, 0.2342
+Hit@3: 0.1266, 0.4213
+Hit@5: 0.2137, 0.5345
+Hit@10: 0.3976, 0.7244
+############################
+TransComplEx
+
+lr = 0.5, lam = 0.01, lam2 = 0.3, lam3 = 0.001, dim = 200, negsample_num = 10, gamma = 24, temp = 0, epoch = 200
+
+Without Grounding
+
+Mean Rank: 12, 6
+Mean RR: 0.1815, 0.4236
+Hit@1: 0.0461, 0.2309
+Hit@3: 0.1625, 0.5200
+Hit@5: 0.2737, 0.6741
+Hit@10: 0.5480, 0.8678
+
+
+With Grounding
+
+Mean Rank: 12, 6
+Mean RR: 0.1965, 0.4340
+Hit@1: 0.0563, 0.2426
+Hit@3: 0.1830, 0.5270
+Hit@5: 0.3017, 0.6820
+Hit@10: 0.5642, 0.8696
+#######################
+#LogicENN
+
+lr = 0.001, lam = 0.01, lam2 = 0.3, lam3 = 0.001, dim = 200, negsample_num = 10, xxgamma = 24, temp = 0, epoch = 200
+
+Loss: Log_loss_adv
+
+Without Grounding
+
+Mean Rank: 13, 4
+Mean RR: 0.1211, 0.5975
+Hit@1: 0.0084, 0.4223
+Hit@3: 0.0624, 0.7239
+Hit@5: 0.1369, 0.8301
+Hit@10: 0.4441, 0.9353
+
+With Grounding
+
+Mean Rank: 12, 4
+Mean RR: 0.1261, 0.6305
+Hit@1: 0.0093, 0.4707
+Hit@3: 0.0633, 0.7463
+Hit@5: 0.1476, 0.8487
+Hit@10: 0.4646, 0.9376
+
+
+

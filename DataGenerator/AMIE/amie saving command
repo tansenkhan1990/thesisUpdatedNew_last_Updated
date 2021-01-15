@@ -1,0 +1,9 @@
+Run this command in CommandLine to generate rules based on TSV
+
+nohup java -XX:-UseGCOverheadLimit -Xmx8G -jar amie_plus.jar tsv_filename.tsv > file_to_save_output.txt
+
+1. TSV file is needed to generate rules
+2. Rule will be generated in a txt file which one shall have to filter using threshold_based_feature_extractor
+
+
+nohup java -XX:-UseGCOverheadLimit -Xmx8G -jar amie_plus.jar train.txt > wn18_all_rules.txt
