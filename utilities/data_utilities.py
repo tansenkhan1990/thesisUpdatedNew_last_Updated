@@ -25,7 +25,6 @@ class KnowledgeGraph:
         #self.validation_triples = []
         self.test_triples = []
         self.all_triples = []
-        self.n_training_triple = 0
         #self.n_validation_triple = 0
         self.n_test_triple = 0
         self.rev_set = rev_set

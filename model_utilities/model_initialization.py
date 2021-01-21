@@ -5,6 +5,7 @@ from torch.nn.init import xavier_normal_
 from torch.nn import functional as F
 from torch.autograd import Variable
 #from model_utilities.model_initialization import *
+from einops import repeat
 
 class model(nn.Module):
     def __init__(self, name, kg, embedding_dim, batch_size, learning_rate, L, gamma, n_triples ,n_relation, n_entity,
@@ -88,7 +89,7 @@ class model(nn.Module):
         #we also need to adapt
         #print(self.emb_E.weight.data.uniform_(1, 1))
         if self.name == 'distmult_quad' or self.name == 'transE_quad' or self.name == 'transH_element_quad' \
-                or self.name == 'complEx_quad':
+                or self.name == 'complEx_quad' or self.name == 'transR_quad':
             if self.gpu:
                 h_i = Variable(torch.from_numpy(head).cuda())
                 t_i = Variable(torch.from_numpy(tail).cuda())
@@ -403,6 +404,73 @@ class model(nn.Module):
             # print(out.size())
             # exit()
             return out
+        elif self.name == 'transR':
+
+            h = self.emb_E(h_i).view(-1, self.embedding_dim)
+            t = self.emb_E(t_i).view(-1, self.embedding_dim)
+            r = self.emb_R(r_i).view(-1, self.embedding_dim)
+            pr = self.proj(r_i).view(-1, self.embedding_dim, self.embedding_dim)
+
+            #h_pr = torch.matmul(h.view(-1,1,self.embedding_dim),pr)
+            #t_pr = torch.matmul(t.view(-1,1, self.embedding_dim),pr)
+
+            h_pr = torch.matmul(h,pr)
+            t_pr = torch.matmul(t,pr)
+
+            #exit()
+            #exit()
+            if self.L == 'L1':
+                #out = torch.sum(torch.abs(h + r - t), 1)
+                out = torch.sum(torch.abs(h_pr + r - t_pr) ,dim=1)
+            else:
+                out = torch.norm((h_pr + r - t_pr), p=2, dim=1)
+
+            #print(out)
+            #exit()
+            return out
+
+        elif self.name == 'transR_quad':
+
+            h = self.emb_E(h_i).view(-1, self.embedding_dim)
+            t = self.emb_E(t_i).view(-1, self.embedding_dim)
+            r = self.emb_R(r_i).view(-1, self.embedding_dim)
+            tm = self.emb_tm(tm_i).view(-1, self.embedding_dim)
+            loc = self.emb_loc(loc_i).view(-1, self.embedding_dim)
+
+
+            #loc_time = torch.tensor([self.identity * (i*j) for i,j in zip(tm, loc)])
+            #repeated_identity = repeat(self.identity, 'i j -> (tile i) j', tile=self.batch_size)
+            #print(repeated_identity.size())
+            #print(tm.t().size())
+            #print(loc.size())
+            #exit()
+            loc_tim = torch.matmul(loc.t() , tm)
+
+            #print(loc_tim.size())
+            #print(self.identity.size())
+            #exit()
+            #print(self.identity.size())
+            #print(loc_tim.size())
+            #exit()
+            loc_tim = self.identity + loc_tim # [dXd metrix + dXd vector]
+            #print(loc_time.size())
+            #print(loc_time.size())
+            #print(repeated_identity.size())
+            #exit()
+            h_t = torch.matmul(h, loc_tim)
+            t_t = torch.matmul(t, loc_tim)
+            #print(h_t.size())
+            #print(t_t.size())
+            #exit()
+            if self.L == 'L1':
+                out = torch.sum(torch.abs(h_t + r - t_t), 1)
+                #e={1,2,3.....d}
+
+            else:
+                out = torch.sqrt(torch.sum((h_t + r - t_t) ** 2, 1))
+
+            return out
+
         elif self.name == 'transH_element':
             h = self.emb_E(h_i).view(-1, self.embedding_dim)
             t = self.emb_E(t_i).view(-1, self.embedding_dim)
@@ -608,6 +676,9 @@ class model(nn.Module):
             loc = loc.view(loc.size()[0], new_dim, 3)
             #print(h.size())
             wloctime = torch.cross(tm, loc,dim = 2)
+            print(tm.size())
+            print(loc.size())
+            exit()
             # print(wloctime.size())
             #exit()
             # h = h.view(h.size()[0], 200,3)
@@ -783,8 +854,27 @@ class model(nn.Module):
             #relation_embeddings = torch.Tensor.cpu(self.emb_R).detach().numpy()
             #print(entity_embeddings)
             #print(relation_embeddings)
-            #exit()
             self.normalize_embeddings()
+
+        elif self.name == 'transR':
+            self.emb_E = torch.nn.Embedding(self.kg.n_entity, self.embedding_dim , padding_idx=0)
+            self.emb_R = torch.nn.Embedding(self.kg.n_relation, self.embedding_dim, padding_idx=0)
+            self.proj = torch.nn.Embedding(self.n_relation, self.embedding_dim * self.embedding_dim)
+            nn.init.xavier_uniform_(self.emb_E.weight.data)
+            nn.init.xavier_uniform_(self.emb_R.weight.data)
+            nn.init.xavier_uniform_(self.proj.weight.data)
+            self.normalize_embeddings()
+
+        elif self.name == 'transR_quad':
+            self.emb_E = torch.nn.Embedding(self.kg.n_entity, self.embedding_dim, padding_idx=0)
+            self.emb_R = torch.nn.Embedding(self.kg.n_relation, self.embedding_dim, padding_idx=0)
+            self.emb_tm = torch.nn.Embedding(self.kg.n_times, self.embedding_dim, padding_idx=0)
+            self.emb_loc = torch.nn.Embedding(self.kg.n_locations, self.embedding_dim, padding_idx=0)
+            self.identity = torch.eye(self.embedding_dim)
+            xavier_normal_(self.emb_E.weight.data)
+            xavier_normal_(self.emb_R.weight.data)
+            xavier_normal_(self.emb_tm.weight.data)
+            xavier_normal_(self.emb_loc.weight.data)
 
 
         elif self.name == 'transH':

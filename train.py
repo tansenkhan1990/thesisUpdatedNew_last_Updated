@@ -19,6 +19,7 @@ from utilities.model_saving_utilities import save_model
 
 
 
+
 def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=2750,
           lr=0.1,min_epoch=500, max_epoch=10, gamma=1, temp=0, negsample_num=8,rev_set=0,
           Optimal = False, lam=0.01, L = "L1",
@@ -457,11 +458,11 @@ def main():
 
 
 # ##########################complex_quad##############################
-    print("********************complex_quad*******************************8")
-    train( name='complEx_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
-        gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-        regul=True, max_epoch= 200,
-        test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
+#     print("********************complex_quad*******************************8")
+#     train( name='complEx_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
+#         gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
+#         regul=True, max_epoch= 200,
+#         test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
     ####################### for triple complEx##############################
     # print("********************running*******************************8")
@@ -523,7 +524,11 @@ def main():
     #       regul=False, max_epoch=200,
     #       test_mode=False, saving=True, fifthopole=False, batch_size=2750, data_dir='dataset/yago3_10/mapped_two')
 
-
+    print("********************complex_quad*******************************8")
+    train( name='transR_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
+        gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
+        regul=False, max_epoch= 600,
+        test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
 if __name__ == '__main__':
     main()

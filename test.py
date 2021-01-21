@@ -123,3 +123,7 @@ res = [[i,j,k, l] for i, j, k, l in zip(listA, listB, listC, listD)]
 # Result
 print("The concatenated lists: ",res)
 print(np.array(res).shape)
+
+import torch
+
+pt_3_by_3_eye_ex = torch.eye(200)
