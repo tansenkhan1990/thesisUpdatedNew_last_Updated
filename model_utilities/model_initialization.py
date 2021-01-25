@@ -448,20 +448,24 @@ class model(nn.Module):
 
             #print(loc_tim.size())
             #print(self.identity.size())
-            #exit()
+
             #print(self.identity.size())
             #print(loc_tim.size())
             #exit()
             loc_tim = self.identity + loc_tim # [dXd metrix + dXd vector]
+            # print(loc_tim)
+            # exit()
             #print(loc_time.size())
             #print(loc_time.size())
             #print(repeated_identity.size())
             #exit()
             h_t = torch.matmul(h, loc_tim)
             t_t = torch.matmul(t, loc_tim)
-            #print(h_t.size())
-            #print(t_t.size())
-            #exit()
+
+            # print(h_t)
+            # print("***************")
+            # print(t_t)
+            # exit()
             if self.L == 'L1':
                 out = torch.sum(torch.abs(h_t + r - t_t), 1)
                 #e={1,2,3.....d}
@@ -676,9 +680,9 @@ class model(nn.Module):
             loc = loc.view(loc.size()[0], new_dim, 3)
             #print(h.size())
             wloctime = torch.cross(tm, loc,dim = 2)
-            print(tm.size())
-            print(loc.size())
-            exit()
+            # print(tm.size())
+            # print(loc.size())
+            # exit()
             # print(wloctime.size())
             #exit()
             # h = h.view(h.size()[0], 200,3)
