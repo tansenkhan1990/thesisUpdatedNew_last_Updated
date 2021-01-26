@@ -466,12 +466,17 @@ class model(nn.Module):
             # print("***************")
             # print(t_t)
             # exit()
-            if self.L == 'L1':
-                out = torch.sum(torch.abs(h_t + r - t_t), 1)
-                #e={1,2,3.....d}
-
+            if self.regul == True:
+                out =  torch.sum(torch.abs(h_t + r - t_t), 1)
+                regular = (torch.mean(h ** 2) + torch.mean(t ** 2) + torch.mean(r ** 2) + torch.mean(tm ** 2) + torch.mean(loc ** 2))/5
+                return out,regular
             else:
-                out = torch.sqrt(torch.sum((h_t + r - t_t) ** 2, 1))
+                if self.L == 'L1':
+                    out = torch.sum(torch.abs(h_t + r - t_t), 1)
+                    #e={1,2,3.....d}
+
+                else:
+                    out = torch.sqrt(torch.sum((h_t + r - t_t) ** 2, 1))
 
             return out
 

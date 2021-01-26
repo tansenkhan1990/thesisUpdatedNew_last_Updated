@@ -433,7 +433,7 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
 
 def main():
     #lr = 0.1
-    lr = 0.1
+    lr = 0.1 # for dismult_quad it perform well and transR
     #################################################################
     #unused in my case
     lam = 0.1
@@ -444,9 +444,10 @@ def main():
     ###################################################################
     negsample_num = 10
     dim = 200
-    #dim = 600
+    #dim = 600 # for transH_element
+    #for dismult quad and dismult margin (gamma have to be higher)
     #gamma = 1000
-    gamma = 10
+    gamma = 1000
     temp = 0
     # for lr in [0.5]:
     #     for lam in [0.01]: #0.05 for others
@@ -482,15 +483,15 @@ def main():
     # print("********************dismult*******************************")
     # train( name='distmult', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
     #     gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-    #     regul=False, max_epoch= 200,
+    #     regul=True, max_epoch= 200,
     #     test_mode=False, saving=True, fifthopole = False, batch_size=2750, data_dir='dataset/yago3_10/mapped_two', L = 'L2')
 
 
     # print("********************dismult_quad*******************************8")
     # train( name='distmult_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
     #     gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-    #     regul=False, max_epoch= 200,
-    #     test_mode=False, saving=True, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
+    #     regul=True, max_epoch= 200,
+    #     test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
     ######################## for triple transH##############################
     # print("********************running*******************************")
@@ -506,6 +507,7 @@ def main():
     #     test_mode=False, saving=True, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
     ####################### for triple complEx##############################
+    # for complex and dismult regulation is true
     # print("********************running*******************************8")
     # train(name='complEx', model=model, dim=dim, lr=lr, negsample_num=negsample_num,
     #       gamma=gamma, temp=temp, lam=lam, lam2=lam2, lam3=lam3, lam4=lam4,
@@ -515,7 +517,7 @@ def main():
     # print("********************complex_quad*******************************8")
     # train( name='complEx_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
     #     gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-    #     regul=False, max_epoch= 200,
+    #     regul=True, max_epoch= 200,
     #     test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
 
@@ -523,8 +525,8 @@ def main():
     # print("********************transR_quad*******************************8")
     train( name='transR_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
         gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-        regul=False, max_epoch= 200,
-        test_mode=False, saving=True, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
+        regul= True, max_epoch= 200,
+        test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
 
 
