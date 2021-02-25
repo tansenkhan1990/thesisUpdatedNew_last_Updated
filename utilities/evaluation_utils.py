@@ -4,7 +4,7 @@ import torch.nn as nn
 from torch.nn.init import xavier_normal_
 from torch.nn import functional as F
 from torch.autograd import Variable
-
+import  pandas as pd
 def accuracy(y_pred, y_true):
     """
     Compute accuracy score.
@@ -193,14 +193,18 @@ def right_rank_t(self, X , Largest=False): #True for distmult complex
             X_i[i, 2] = triple[2]
             X_i[i, 3] = triple[3]
             X_i[i, 4] = triple[4]
+        X_i_df = pd.DataFrame(X_i)
+        original = X_i_df.loc[(X_i_df[0]==triple[0]) & (X_i_df[1] == triple[1]) & (X_i_df[2]==triple[2])]
         if self.regul == True:
             [i_score, reg] = self.forward_t(X_i)
         else:
             i_score = self.forward_t(X_i)
         if self.gpu:
             i_score = i_score.view(1, -1).cuda()
-
+        original_score =  (X_i_df[(X_i_df[0]  == triple[0]) & (X_i_df[1] == triple[1]) & (X_i_df[2] == triple[2])].index.tolist())
+        print('triple: ', str(original) , 'score: ', str(original_score[0]))
         [i_score, rank_all] = torch.topk(i_score, self.kg.n_entity, largest=Largest)
+        # here need to print the score and id
         rank_triple = 1
         rank_filter_triple = 1
         for rank_i in rank_all:

@@ -310,6 +310,7 @@ class model(nn.Module):
 
             loc_real = self.emb_loc_real(loc_i).view(-1, self.embedding_dim)
             loc_im = self.emb_loc_im(loc_i).view(-1, self.embedding_dim)
+            # replace the actual formula win sum
 
             head_real_z = head_real * tim_real - head_im * tim_im
             head_im_z = head_real * tim_im + head_im * tim_real

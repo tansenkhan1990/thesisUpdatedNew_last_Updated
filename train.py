@@ -213,6 +213,8 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
             if  fifthopole == True:
                 if (model.regul == True):
                     [pos_score, pos_reg] = model.forward_t(iter_triple)
+                    #print positive score
+                    #Print negative scoee
                     [neg_score, neg_reg] = model.forward_t(iter_neg)
                 else:
                     pos_score = model.forward_t(iter_triple)
