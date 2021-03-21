@@ -216,9 +216,17 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
                     #print positive score
                     #Print negative scoee
                     [neg_score, neg_reg] = model.forward_t(iter_neg)
+                    print('++++++++++++++++ this is positive +++++++++++++++++++')
+                    print(pos_score)
+                    print('++++++++++++++++++ this is negative ++++++++++++++++++++++++++++++++++++')
+                    print(neg_score)
                 else:
                     pos_score = model.forward_t(iter_triple)
                     neg_score= model.forward_t(iter_neg)
+                    print('++++++++++++++++ this is positive +++++++++++++++++++')
+                    print(pos_score)
+                    print('++++++++++++++++++ this is negative ++++++++++++++++++++++++++++++++++++')
+                    print(neg_score)
             else:
                 if (model.regul == True):
                     [pos_score, pos_reg] = model.forward(iter_triple)
@@ -434,11 +442,11 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
 
 
 def main():
-    #lr = 0.1
-    lr = 0.1 # for dismult_quad it perform well and transR
+    lr = 0.1
+ #   lr = 0.8 # for dismult_quad it perform well and transR
     #################################################################
     #unused in my case
-    lam = 0.1
+    lam = 0.05
     lam2 = 3
     lam3 = 0.01
     lam4 = 0.1
@@ -448,8 +456,9 @@ def main():
     dim = 200
     #dim = 600 # for transH_element
     #for dismult quad and dismult margin (gamma have to be higher)
-    #gamma = 1000
+    #gamma = 10
     gamma = 1000
+   # gamma = 10 # for complex_quad
     temp = 0
     # for lr in [0.5]:
     #     for lam in [0.01]: #0.05 for others
@@ -517,18 +526,18 @@ def main():
     #       test_mode=False, saving=False, fifthopole=False, batch_size=2750, data_dir='dataset/yago3_10/mapped_two')
 
     # print("********************complex_quad*******************************8")
-    # train( name='complEx_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
-    #     gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-    #     regul=True, max_epoch= 200,
-    #     test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
+    train( name='complEx_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
+        gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
+        regul=True, max_epoch= 200,
+        test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
 
 
     # print("********************transR_quad*******************************8")
-    train( name='transR_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
-        gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-        regul= True, max_epoch= 200,
-        test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
+    # train( name='transR_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
+    #     gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
+    #     regul= True, max_epoch= 200,
+    #     test_mode=False, saving=False, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped', L = 'L2')
 
 
 

@@ -325,6 +325,17 @@ class model(nn.Module):
                     + head_real_z * tail_im_z * relation_im
                     - head_im_z * tail_real_z * relation_im,
                     dim=1)
+
+                # out = torch.sum(
+                #     (head_real * tim_real - head_im * tim_im) * (tail_real * loc_real - tail_im * loc_im)
+                #     *(self.emb_R_real(r_i).view(-1, self.embedding_dim))
+                #     + (head_real * tim_im + head_im * tim_real) * (tail_real * loc_im + tail_im * loc_real)
+                #     * ( self.emb_R_real(r_i).view(-1, self.embedding_dim))
+                #     + (head_real * tim_real - head_im * tim_im) * (tail_real * loc_im + tail_im * loc_real)
+                #     * ( self.emb_R_im(r_i).view(-1, self.embedding_dim))
+                #     - (head_real * tim_im + head_im * tim_real) * (tail_real * loc_real - tail_im * loc_im)
+                #     * (self.emb_R_im(r_i).view(-1, self.embedding_dim)),
+                #     dim=1)
                 # over original not for z
                 regul = (torch.mean(head_real ** 2) \
                          + torch.mean(head_im ** 2) \
