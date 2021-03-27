@@ -1,0 +1,1 @@
+python train_version_2.py --name complEx_quad --dim 200 --lr 0.01 --neg_sample 8 --gamma 10 --temp 0 --regul True --max_epoch 200 --fifthopole True --batch_size 2750 --data_dir yago3_10/mapped
