@@ -133,7 +133,7 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
         dir_ext = 'with_grounding'
 ################################################################################################################
     base_dir = data_dir
-    res_dir_name = neg_sampling_mode + name + dir_ext + '_refined'
+    res_dir_name = str(neg_sampling_mode) + str(name) + str(dir_ext) + str(dim) + str(max_epoch) + str(gamma) + str(negsample_num) + str(lr) + str(temp)
     data_dir = os.path.join(data_dir,'tansen_results')
     path = os.path.join(data_dir, res_dir_name)
     if os.path.isdir(path)==False:
@@ -217,24 +217,29 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
                     #print positive score
                     #Print negative scoee
                     [neg_score, neg_reg] = model.forward_t(iter_neg)
-                    print('++++++++++++++++ this is positive +++++++++++++++++++')
-                    print(pos_score)
-                    print('++++++++++++++++++ this is negative ++++++++++++++++++++++++++++++++++++')
-                    print(neg_score)
+                    #print('++++++++++++++++ this is positive +++++++++++++++++++')
+                    #print(pos_score)
+                    #print('++++++++++++++++++ this is negative ++++++++++++++++++++++++++++++++++++')
+                    #print(neg_score)
                 else:
                     pos_score = model.forward_t(iter_triple)
                     neg_score= model.forward_t(iter_neg)
-                    print('++++++++++++++++ this is positive +++++++++++++++++++')
-                    print(pos_score)
-                    print('++++++++++++++++++ this is negative ++++++++++++++++++++++++++++++++++++')
-                    print(neg_score)
+                    #print('++++++++++++++++ this is positive +++++++++++++++++++')
+                    #print(pos_score)
+                    #print('++++++++++++++++++ this is negative ++++++++++++++++++++++++++++++++++++')
+                    #print(neg_score)
+                    #exit()
             else:
                 if (model.regul == True):
                     [pos_score, pos_reg] = model.forward(iter_triple)
                     [neg_score, neg_reg] = model.forward(iter_neg)
                 else:
+                    #print(iter_triple)
+                    #print(iter_neg)
                     pos_score = model.forward(iter_triple)
                     neg_score= model.forward(iter_neg)
+                    #print(pos_score)
+                    #print(neg_score)
 
             if (model.regul == True):
                 loss = log_loss_adv_with_regularization(model, pos_score, neg_score, pos_reg, neg_reg, lam ,temp)
@@ -399,6 +404,7 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
                 saved_model_name = 'trained_model_' + model.name + '_' + saved_model_name_ext
                 model_save_path = os.path.join(base_dir, 'trained_model')
                 save_model(model, optimizer=solver, save_path=model_save_path, model_name = saved_model_name)
+            f.write('dim: {:.0f}, epoch: {:.0f}, gamma: {:.4f}, lr: {:.4f}, batch_size: {:.4f}, temp: {:.4f}\n'.format(dim, max_epoch, gamma, lr ,batch_size, temp))
             f.write('Mean Rank: {:.0f}, {:.0f}\n'.format(m_rank, m_rank_filter))
             f.write('Mean RR: {:.4f}, {:.4f}\n'.format(mean_rr, mrr_filter))
             f.write('Hit@1: {:.4f}, {:.4f}\n'.format(hit_1, hit_1_filter))
@@ -527,10 +533,10 @@ def main():
     #       test_mode=False, saving=False, fifthopole=False, batch_size=2750, data_dir='dataset/yago3_10/mapped_two')
 
     # print("********************complex_quad*******************************8")
-    train( name='complEx_quad', model = model,dim=dim, lr=lr,negsample_num=neg_sample,
+    train( name=model_name, model = model,dim=dim, lr=lr,negsample_num=neg_sample,
         gamma=gamma, temp = temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
-        regul=True, max_epoch= 200,
-        test_mode=False, saving=False, fifthopole = True, batch_size=batch_size, data_dir='dataset/yago3_10/mapped', L = 'L2')
+        regul=regul, max_epoch= max_epoch,
+        test_mode=False, saving=False, fifthopole = fifthopole, batch_size=batch_size, data_dir=dataset, L = 'L2')
 
 
 
@@ -560,14 +566,14 @@ if __name__ == '__main__':
     parser.add_argument("--batch_size", "-b", help="batch size")
     parser.add_argument("--neg_sample", "-n", help="negative sampling size")
     parser.add_argument("--epochs", "-e", help="maximum epochs to be done")
-    parser.add_argument('--regul', '-r' , default = False, type = bool)
+    parser.add_argument('--regul', '-r' , default = False, type = str)
     parser.add_argument('--cuda', action='store_true', help='use GPU')
     #parser.add_argument('--eval_log_steps', default=50, type=int)
 
     parser.add_argument('--gamma', default=24, type=int)
     parser.add_argument('--temp', '-t', default=0, type=int)
     parser.add_argument('--max_epoch', '-me', default=250, type=int)
-    parser.add_argument('--fifthopole', '-f', default=False, type = bool)
+    parser.add_argument('--fifthopole', '-f', default=False, type = str)
     parser.add_argument('--L', default='L2', type=str)
 
 
@@ -586,12 +592,24 @@ if __name__ == '__main__':
     epochs = int(args.max_epoch)
     gamma = int(args.gamma)
     temp  = int(args.temp)
-    regul = int(args.regul)
+    regul = str(args.regul)
     max_epoch = int(args.max_epoch)
+    fifthopole = str(args.fifthopole)
+    #print(args.regul)
+    #exit()
     #eval_log_steps = args.eval_log_steps
-    regularization = False
-    if args.regul:
-        regularization = True
+    # regularization = False
+    # if args.regul:
+    #     regularization = True
+    if args.regul == 'True':
+        regul = True
+    else:
+        regul = False
+
+    if args.fifthopole == 'True':
+        fifthopole = True
+    else:
+        fifthopole = False
 
     print("Given hyperparameters")
     print("Model name: ", model_name)
@@ -601,6 +619,7 @@ if __name__ == '__main__':
     print("Batch size: ", batch_size)
     print("Negative Sampling size: ", neg_sample)
     print("Max epochs: ", epochs)
-    print("Regularization: ", regularization)
-
+    print("Regularization: ", regul)
+    print("Fifthopole: ", fifthopole)
+    #exit()
     main()
