@@ -404,13 +404,13 @@ def train(name, model,data_dir='dataset/yago3_10/mapped',dim=200, batch_size=275
                 saved_model_name = 'trained_model_' + model.name + '_' + saved_model_name_ext
                 model_save_path = os.path.join(base_dir, 'trained_model')
                 save_model(model, optimizer=solver, save_path=model_save_path, model_name = saved_model_name)
-            f.write('dim: {:.0f}, epoch: {:.0f}, gamma: {:.4f}, lr: {:.4f}, batch_size: {:.4f}, temp: {:.4f}\n'.format(dim, max_epoch, gamma, lr ,batch_size, temp))
-            f.write('Mean Rank: {:.0f}, {:.0f}\n'.format(m_rank, m_rank_filter))
-            f.write('Mean RR: {:.4f}, {:.4f}\n'.format(mean_rr, mrr_filter))
-            f.write('Hit@1: {:.4f}, {:.4f}\n'.format(hit_1, hit_1_filter))
-            f.write('Hit@3: {:.4f}, {:.4f}\n'.format(hit_3, hit_3_filter))
-            f.write('Hit@5: {:.4f}, {:.4f}\n'.format(hit_5, hit_5_filter))
-            f.write('Hit@10: {:.4f}, {:.4f}\n'.format(hit_10, hit_10_filter))
+            f.write('dim: {:.0f}\nepoch: {:.0f}\ngamma: {:.4f}\nlr: {:.4f}\nbatch_size: {:.4f}\ntemp: {:.4f}\n'.format(dim, max_epoch, gamma, lr ,batch_size, temp))
+            f.write('Mean Rank(F): {:.0f}\n'.format(m_rank_filter))
+            f.write('Mean RR(F): {:.4f}\n'.format(mrr_filter))
+            f.write('Hit@1(F): {:.4f}\n'.format(hit_1_filter))
+            f.write('Hit@3(F): {:.4f}\n'.format(hit_3_filter))
+            f.write('Hit@5(F): {:.4f}\n'.format(hit_5_filter))
+            f.write('Hit@10(F): {:.4f}\n'.format(hit_10_filter))
             # model = model(name, kg=kg, embedding_dim=dim, batch_size=batch_size, learning_rate=lr, L='L1', gamma=gamma,
             #               n_triples=n_triples, n_relation=n_relation, n_entity=n_entity, gpu=True, regul=regul,
             #               negative_adversarial_sampling=True, temp=temp, train_with_groundings=train_with_groundings)
