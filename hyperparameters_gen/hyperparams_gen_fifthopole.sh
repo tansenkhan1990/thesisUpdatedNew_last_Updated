@@ -24,7 +24,7 @@ DATA_PATH=$dataset
 LOSS_FUNC=("rotate")
 
 executed_flag="false"
-email_address="tansenkhan@gmail.com"
+email_address="tansenkhan1990@gmail.com"
 job_name="hyperparam_search"
 
 
@@ -49,7 +49,7 @@ for d in "${dims[@]}";do
 #               available_mem=${available_mem//[^0-9]/}
 #               echo "available mem is: $available_mem"
 #               if [[ ${available_mem} -gt 1980 ]];then
-                command="python train_version_2.py --data_dir $DATA_PATH --name $model --neg_sample $neg --batch_size $b --dim $d --gamma $g --temp $temperature --lr $lr --max_epoch $max_steps --regul True --fifthopole True"
+                command="python train_version_2.py --name $model --dim $d --lr $lr --neg_sample $neg --gamma $g --temp $temperature --regul True --max_epoch $max_steps  --fifthopole True" --batch_size $b  --data_dir $DATA_PATH
 
                 echo  "following command is executed"
                 echo  $command >> ../hyperparameters_command/commands.txt
