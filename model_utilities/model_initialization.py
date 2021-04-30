@@ -5,7 +5,7 @@ from torch.nn.init import xavier_normal_
 from torch.nn import functional as F
 from torch.autograd import Variable
 #from model_utilities.model_initialization import *
-from einops import repeat
+#from einops import repeat
 
 class model(nn.Module):
     def __init__(self, name, kg, embedding_dim, batch_size, learning_rate, L, gamma, n_triples ,n_relation, n_entity,
