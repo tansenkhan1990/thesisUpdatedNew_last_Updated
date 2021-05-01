@@ -247,10 +247,10 @@ def mapped_id_to_original_triples(triples, entity_to_id, rel_to_id):
 #     df[c1] = df[c2]
 #     df[c2] = df['temp']
 #     df.drop(columns=['temp'], inplace=True)
-data_dir = '/home/tansen/my files/thesis/mirza_framework_for_rotateE/rule_learning_framework-master/dataset/yago3_10'
-save_data_dir = 'mapped'
+data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
+save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
 save_data_dir = os.path.join(data_dir,save_data_dir)
-train_data_dir = os.path.join(data_dir, 'original_quadropoles.txt')
+train_data_dir = os.path.join(data_dir, 'wikidata.txt')
 
 quadropoles = pd.read_table(train_data_dir, header=None, dtype=str)
 quadropoles = quadropoles.dropna(how='any',axis=0)
@@ -272,7 +272,7 @@ write_dic(time_to_id ,time2id)
 write_dic(location_to_id,loc2id)
 
 train_pos, test_pos = train_test_split(quadropoles, test_size=0.2)
-base_path = '/home/tansen/my files/thesis/mirza_framework_for_rotateE/rule_learning_framework-master/dataset/yago3_10'
+base_path = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
 entity_to_id = pd.read_table(os.path.join(base_path,'entities.dict'), header=None, dtype=str)
 rel_to_id = pd.read_table(os.path.join(base_path,'relations.dict'), header=None, dtype=str)
 time_to_id = pd.read_table(os.path.join(base_path,'times.dict'), header=None, dtype=str)
