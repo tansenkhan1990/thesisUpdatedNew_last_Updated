@@ -25,12 +25,12 @@ def write_to_txt_file(path, data):
         #print(line)
     f.close()
 
-data_dir = '/home/tansen/Desktop/remove_deplicates_from_main_file'
+data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata'
 
-maindata = pd.read_table(os.path.join(data_dir,'original_quadropoles.txt'),header= None, dtype=str)
+maindata = pd.read_table(os.path.join(data_dir,'dbpedia.txt'),header= None, dtype=str)
 data = np.array(maindata).astype(str)
 data = np.unique(data, axis=0)
-write_to_txt_file(os.path.join(data_dir, 'original_quadropoles.txt'), data)
+write_to_txt_file(os.path.join(data_dir, 'dbpedia.txt'), data)
 
 # maindata = pd.DataFrame(maindata)
 #
@@ -46,4 +46,4 @@ write_to_txt_file(os.path.join(data_dir, 'original_quadropoles.txt'), data)
 #
 # print(duplicatedData.head())
 
-print(dup2)
+# print(dup2)

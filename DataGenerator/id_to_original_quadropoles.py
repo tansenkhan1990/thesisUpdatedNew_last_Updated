@@ -67,8 +67,10 @@ def mapped_id_to_original_fifthopoles(fifthopoles, entity_to_id, rel_to_id, tm_t
 #     df.drop(columns=['temp'], inplace=True)
 
 
-
-data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
+#for wikipedia data
+# data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
+#for dbpedia data
+data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result'
 save_data_dir = 'mapped'
 train = pd.read_table(os.path.join(data_dir, 'train.txt'), header=None)
 test = pd.read_table(os.path.join(data_dir, 'test.txt'), header=None)
@@ -80,6 +82,10 @@ loc_to_id = pd.read_table(os.path.join(data_dir, 'locations.dict'), header=None)
 train_original = mapped_id_to_original_fifthopoles(train, entity_to_id, rel_to_id, tm_to_id, loc_to_id)
 test_original = mapped_id_to_original_fifthopoles(test, entity_to_id, rel_to_id, tm_to_id, loc_to_id)
 
-train_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result/train_original.txt', index=False, header=None, sep = '\t')
-test_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result/test_original.txt', index=False, header=None, sep='\t')
+#for wikipedia data
+# train_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result/train_original.txt', index=False, header=None, sep = '\t')
+# test_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result/test_original.txt', index=False, header=None, sep='\t')
 
+#for dbpedia data
+train_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt', index=False, header=None, sep = '\t')
+test_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/test_original.txt', index=False, header=None, sep='\t')

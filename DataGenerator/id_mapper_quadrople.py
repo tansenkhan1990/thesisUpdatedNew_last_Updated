@@ -247,12 +247,23 @@ def mapped_id_to_original_triples(triples, entity_to_id, rel_to_id):
 #     df[c1] = df[c2]
 #     df[c2] = df['temp']
 #     df.drop(columns=['temp'], inplace=True)
-data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
-save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
+# for wiki data
+# data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
+# save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
+#for dbpedia data
+data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata'
+save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result'
 save_data_dir = os.path.join(data_dir,save_data_dir)
-train_data_dir = os.path.join(data_dir, 'wikidata.txt')
+#for wikipedia data
+# train_data_dir = os.path.join(data_dir, 'wikidata.txt')
 
-quadropoles = pd.read_table(train_data_dir, header=None, dtype=str)
+#for dbpedia data
+train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
+
+#for wikidata data
+# quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str)
+#for dbpedia data
+quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str,error_bad_lines=False)
 quadropoles = quadropoles.dropna(how='any',axis=0)
 
 #train_pos, test_pos = train_test_split(pos_triples, test_size=0.2)
@@ -272,7 +283,7 @@ write_dic(time_to_id ,time2id)
 write_dic(location_to_id,loc2id)
 
 train_pos, test_pos = train_test_split(quadropoles, test_size=0.2)
-base_path = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
+base_path = '/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata'
 entity_to_id = pd.read_table(os.path.join(base_path,'entities.dict'), header=None, dtype=str)
 rel_to_id = pd.read_table(os.path.join(base_path,'relations.dict'), header=None, dtype=str)
 time_to_id = pd.read_table(os.path.join(base_path,'times.dict'), header=None, dtype=str)
