@@ -263,7 +263,7 @@ train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
 #for wikidata data
 # quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str)
 #for dbpedia data
-quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str,error_bad_lines=False)
+quadropoles = pd.read_csv(train_data_dir, header=None, sep='\t', dtype=str)
 quadropoles = quadropoles.dropna(how='any',axis=0)
 
 #train_pos, test_pos = train_test_split(pos_triples, test_size=0.2)

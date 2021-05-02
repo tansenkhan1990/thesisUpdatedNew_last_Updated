@@ -38,8 +38,25 @@ df_ultimate[2] = df_ultimate[2].str.replace('"','')
 df_ultimate[3] = df_ultimate[3].str.replace('"','')
 df_ultimate[4] = df_ultimate[4].str.replace('"','')
 
+
+# romove coma
+df_ultimate[0] = df_ultimate[0].str.replace(',','')
+df_ultimate[1] = df_ultimate[1].str.replace(',','')
+df_ultimate[2] = df_ultimate[2].str.replace(',','')
+df_ultimate[3] = df_ultimate[3].str.replace(',','')
+df_ultimate[4] = df_ultimate[4].str.replace(',','')
+
+# remove '
+df_ultimate[0] = df_ultimate[0].str.replace("'",'')
+df_ultimate[1] = df_ultimate[1].str.replace("'",'')
+df_ultimate[2] = df_ultimate[2].str.replace("'",'')
+df_ultimate[3] = df_ultimate[3].str.replace("'",'')
+df_ultimate[4] = df_ultimate[4].str.replace("'",'')
+
 #df_ultimate[2] = df_ultimate[2].map(lambda x: x.lstrip('\"\"\"').rstrip(''))
 # for wikipedia
 #pd.DataFrame(df_ultimate).to_csv( '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/wikidata.txt',index = False, sep= '\t', header=None)
 #for dbpedia 
 pd.DataFrame(df_ultimate).to_csv( '/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/dbpedia.txt',index = False, sep= '\t', header=None)
+
+quadropoles = pd.read_table('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/dbpedia.txt', header=None, sep='\t')
