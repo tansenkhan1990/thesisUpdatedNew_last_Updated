@@ -4,9 +4,9 @@
 #lrs=(0.01 0.05 0.1)
 #batch_sizes=(1024)
 #negs=(10 100 1000)
-dims=(32 500)
+dims=(32 100)
 gamma=(1 5 20)
-temperature=0
+temperature = 0
 lrs=(0.00002 0.000002)
 batch_sizes=(512)
 negs=(10 500)

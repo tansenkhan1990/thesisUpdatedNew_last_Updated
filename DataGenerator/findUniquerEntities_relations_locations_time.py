@@ -1,0 +1,50 @@
+import pandas as pd
+dfdbpedia = pd.read_table('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt'
+                   , header = None)
+sortTimesdbpedia = dfdbpedia .sort_values(by=3)
+print(sortTimesdbpedia.head(100))
+sortTimesdbpedia.head(100).to_csv(r'/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/first_100_columns/first_100_columns_dbpedia.csv', index = False, header = False)
+
+entities = dfdbpedia [0].unique()
+relations = dfdbpedia [1].unique()
+times = dfdbpedia [3].unique()
+loations = dfdbpedia [4].unique()
+entitiesNumber = len(entities)
+relationsNumber = len(relations)
+loationsNumber = len(loations)
+timesNumber = len(times)
+print("for dbpedia dataset")
+print("entities : " , entitiesNumber)
+print("relations : " , relationsNumber)
+print("locations : " , loationsNumber)
+print("times : " , timesNumber)
+# sortTimes = dfdbpedia .sort_values(by=3)
+print('for dbpedia')
+print(sortTimesdbpedia[3].astype(int).unique())
+
+# for wikipedia dataset
+dfwiki = pd.read_table('/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result/train_original.txt'
+                   , header = None)
+sortTimeswiki = dfwiki .sort_values(by=3)
+print(sortTimeswiki.head(100))
+sortTimeswiki.head(100).to_csv(r'/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result/first_100_columns_wikipedia/first_100_columns_wiki.csv', index = False, header = False)
+
+
+entities = dfwiki[0].unique()
+relations = dfwiki[1].unique()
+times = dfwiki[3].unique()
+loations = dfwiki[4].unique()
+entitiesNumber = len(entities)
+relationsNumber = len(relations)
+loationsNumber = len(loations)
+timesNumber = len(times)
+print("for wikipedia dataset")
+print("entities : " , entitiesNumber)
+print("relations : " , relationsNumber)
+print("locations : " , loationsNumber)
+print("times : " , timesNumber)
+
+print('sort by values  ')
+sortTimes = dfwiki.sort_values(by=3)
+print('for wikipedia')
+print(sortTimes[3].astype(int).unique())
