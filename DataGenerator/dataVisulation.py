@@ -159,9 +159,21 @@ if __name__ == '__main__':
     df = pd.read_table('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt',header=None)
     data = df.groupby([3, 4], ).agg({1: ['count']}).reset_index()
     data.columns = ['year', 'country', 'feature']
-    data = data[ (data['year']>2000) & (data['year']<2003) &
-                 ((data.country == 'Germany') | (data.country == 'Spain') |
-                  (data.country == 'Japan')|(data.country == 'United_Kingdom'))]
+    data = data[
+        #(
+            data.year>2000
+                # )
+                # &
+                #  ((data.country == 'Germany') | (data.country == 'Spain') |
+                #   (data.country == 'Japan')|(data.country == 'United_Kingdom')
+                # )
+    ]
+    # data = data.drop_duplicates(subset=['country'])
+    data = data.drop_duplicates(subset=['year'])
+    # data = data.duplicated(subset=['country']).sum()
+    # print(data)
+    # data['country'] = data['country'].unique()
+    # data['year'] = data['year'].astype(int)
     # data.columns = ['year', 'country', 'feature']
     # features = df2[1].to_numpy(dtype=int)
     # features = features.tolist()
