@@ -30,7 +30,6 @@ one_to_one_based_on_tail = len(X_to_one_dataset.loc[X_to_one_dataset['head_count
 one_to_many_based_on_tail = len(X_to_one_dataset.loc[X_to_one_dataset['head_count']>1])
 
 
-
 one_to_X_dataset = one_to_X_dataset.reset_index(drop=True)
 unique_relation_count_head = [len(np.unique(one_to_X_dataset['tail'][i])) for i in range(len(one_to_X_dataset))]
 one_to_X_dataset['tail_count'] = unique_relation_count_head
@@ -40,6 +39,28 @@ one_to_one_based_on_head = len(one_to_X_dataset.loc[one_to_X_dataset['tail_count
 one_to_many_based_on_head = len(one_to_X_dataset.loc[one_to_X_dataset['tail_count']>1])
 
 
+one_to_one_based_on_tail = X_to_one_dataset.loc[X_to_one_dataset['head_count'] == 1]
+one_to_one_based_on_head = one_to_X_dataset.loc[one_to_X_dataset['tail_count'] == 1]
+
+one_to_one_first_dataset = pd.DataFrame()
+one_to_one_first_dataset['head'] = one_to_one_based_on_tail['head']
+one_to_one_first_dataset['tail'] = one_to_one_based_on_tail['tail']
+one_to_one_first_dataset['relation'] = one_to_one_based_on_tail['relation']
+one_to_one_first_dataset = one_to_one_first_dataset.reset_index(drop=True)
+one_to_one_first_dataset['head'] = [one_to_one_first_dataset['head'][i][0] for i in range(len(one_to_one_first_dataset))]
+
+
+#for head
+one_to_one_second_dataset = pd.DataFrame()
+one_to_one_second_dataset['head'] = one_to_one_based_on_head['tail']
+one_to_one_second_dataset['tail'] = one_to_one_based_on_head['head']
+one_to_one_second_dataset['relation'] = one_to_one_based_on_head['relation']
+one_to_one_second_dataset = one_to_one_second_dataset.reset_index(drop=True)
+one_to_one_second_dataset['head'] = [one_to_one_second_dataset['head'][i][0] for i in range(len(one_to_one_second_dataset))]
+
+merge_for_one_two_one = pd.DataFrame()
+merge_for_one_two_one = one_to_one_second_dataset.append(one_to_one_second_dataset)
+merge_for_one_two_one = merge_for_one_two_one.drop_duplicates()
 
 # headResult = mainData.groupby('relation')['head'].apply(list).reset_index(name='head')
 # tailResult = mainData.groupby('relation')['tail'].apply(list).reset_index(name='tail')
