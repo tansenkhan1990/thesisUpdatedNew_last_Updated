@@ -536,7 +536,7 @@ def main():
     train( name=model_name, model = model,dim=dim, lr=lr,negsample_num=neg_sample,
         gamma=gamma, temp = temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
         regul=regul, max_epoch= max_epoch,
-        test_mode=False, saving=False, fifthopole = fifthopole, batch_size=batch_size, data_dir=dataset, L = 'L2')
+        test_mode=False, saving=True, fifthopole = fifthopole, batch_size=batch_size, data_dir=dataset, L = 'L2')
 
 
 
