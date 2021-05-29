@@ -45,6 +45,15 @@ def entity_to_id_conversion(entities):
         id_converted.append(entity_to_id_dict[entity])
     return np.array(id_converted)
 
+def id_to_entity_conversion(entity_id):
+    entity_converted = []
+    ###Should be changed for both types 0 1 for sem
+    id_to_entity_dict = dict(zip(entity_to_id[0], entity_to_id[1]))
+
+    for id in entity_id:
+        entity_converted.append(id_to_entity_dict[id])
+    return np.array(entity_converted)
+
 #Read trained embeddings
 entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/trained_model/entity_embedding__embedding_transE_quad.npy')
 
@@ -114,6 +123,7 @@ tsne_df['original_index'] = original_index
 type = original_index_to_type(pd.DataFrame(com), tsne_df['original_index'])
 tsne_df['type'] =type
 
+tsne_df['original_entity'] = id_to_entity_conversion(tsne_df['original_index'].values)
 
 # import plotly.express as px
 #
