@@ -24,8 +24,13 @@ def write_to_txt_file(path, data):
         print(line)
     f.close()
 
+# save_dir = '/dataset/yago3_10/mapped_two'
+# data_dir = '/dataset/yago3_10/mapped'
+#for yago5
+
 save_dir = '/dataset/yago3_10/mapped_two'
 data_dir = '/dataset/yago3_10/mapped'
+
 train = pd.read_table(os.path.join(data_dir, 'train.txt'), header=None)
 train_array = train.iloc[:,:3].values
 test = pd.read_table(os.path.join(data_dir, 'test.txt'), header=None)

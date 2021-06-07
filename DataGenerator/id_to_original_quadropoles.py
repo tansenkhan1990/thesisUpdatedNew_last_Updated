@@ -66,11 +66,14 @@ def mapped_id_to_original_fifthopoles(fifthopoles, entity_to_id, rel_to_id, tm_t
 #     df[c2] = df['temp']
 #     df.drop(columns=['temp'], inplace=True)
 
+#for new yago5
+# data_dir = 'dataset/yago5'
+# save_data_dir = 'mapped'
 
 #for wikipedia data
 # data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
 #for dbpedia data
-data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result'
+data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result'
 save_data_dir = 'mapped'
 train = pd.read_table(os.path.join(data_dir, 'train.txt'), header=None)
 test = pd.read_table(os.path.join(data_dir, 'test.txt'), header=None)
@@ -87,5 +90,9 @@ test_original = mapped_id_to_original_fifthopoles(test, entity_to_id, rel_to_id,
 # test_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result/test_original.txt', index=False, header=None, sep='\t')
 
 #for dbpedia data
-train_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt', index=False, header=None, sep = '\t')
-test_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/test_original.txt', index=False, header=None, sep='\t')
+# train_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt', index=False, header=None, sep = '\t')
+# test_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/test_original.txt', index=False, header=None, sep='\t')
+
+#for yago5
+train_original.to_csv('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/train_original.txt', index=False, header=None, sep = '\t')
+test_original.to_csv('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/test_original.txt', index=False, header=None, sep='\t')
