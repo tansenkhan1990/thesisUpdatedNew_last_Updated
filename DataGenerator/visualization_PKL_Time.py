@@ -2,9 +2,9 @@ import pandas as pd
 import pickle
 import  numpy as np
 import seaborn as sns
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/trained_model/entity_embedding__embedding_transE_quad.npy')
-times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/times.dict', header=None)
-fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/original_quadropoles.txt', header=None)
+entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
+times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/times.dict', header=None)
+fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yago.txt', header=None)
 fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
 times = times.loc[(times[1]>=1000) & (times[1]<=2022)].reset_index(drop=True)
 time_min = times[1].min()
@@ -50,4 +50,4 @@ for i in df_time_category.index:
    #print(joint_list_sub_obj)
    print('#############################')
 entities_in_time_category.columns = ['category', 'matched_entities']
-entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/time_category_wise_entity.pkl')
+entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')

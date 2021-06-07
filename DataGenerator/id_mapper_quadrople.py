@@ -250,23 +250,15 @@ def mapped_id_to_original_triples(triples, entity_to_id, rel_to_id):
 # for wiki data
 # data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
 # save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
-#for yago dataset
-data_dir = 'dataset/yago5'
-save_data_dir = 'result'
-
 #for dbpedia data
-# data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata'
-# save_data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata/result'
-
+data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata'
+save_data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata/result'
 save_data_dir = os.path.join(data_dir,save_data_dir)
 #for wikipedia data
 # train_data_dir = os.path.join(data_dir, 'wikidata.txt')
 
 #for dbpedia data
-# train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
-
-#for yago 
-train_data_dir = os.path.join(data_dir, 'yago.txt')
+train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
 
 #for wikidata data
 # quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str)
@@ -290,10 +282,8 @@ write_dic(write_relation_to_id,rel2id)
 write_dic(time_to_id ,time2id)
 write_dic(location_to_id,loc2id)
 
-#new function for tran validate and test
-# train_pos, test_pos = train_test_split(quadropoles, test_size=0.15)
-train_pos, valid_pos, test_pos = np.split(quadropoles.sample(frac=1), [int(.6*len(quadropoles)), int(.8*len(quadropoles))])
-base_path = 'dataset/yago5'
+train_pos, test_pos = train_test_split(quadropoles, test_size=0.2)
+base_path = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata'
 entity_to_id = pd.read_table(os.path.join(base_path,'entities.dict'), header=None, dtype=str)
 rel_to_id = pd.read_table(os.path.join(base_path,'relations.dict'), header=None, dtype=str)
 time_to_id = pd.read_table(os.path.join(base_path,'times.dict'), header=None, dtype=str)
@@ -301,13 +291,10 @@ location_to_id = pd.read_table(os.path.join(base_path,'locations.dict'), header=
 
 train = original_id_to_quadropoles_str(train_pos, entity_to_id, rel_to_id, time_to_id, location_to_id)
 test = original_id_to_quadropoles_str(test_pos, entity_to_id, rel_to_id, time_to_id, location_to_id)
-valid = original_id_to_quadropoles_str(valid_pos, entity_to_id, rel_to_id, time_to_id, location_to_id)
 
 train_save_dir = os.path.join(save_data_dir, 'train.txt')
 test_save_dir = os.path.join(save_data_dir, 'test.txt')
-valid_save_dir = os.path.join(save_data_dir, 'valid.txt')
 write_to_txt_file(train_save_dir, np.array(train))
 write_to_txt_file(test_save_dir, np.array(test))
-write_to_txt_file(valid_save_dir, np.array(valid))
 
 

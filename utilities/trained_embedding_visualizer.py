@@ -55,22 +55,22 @@ def id_to_entity_conversion(entity_id):
     return np.array(entity_converted)
 
 #Read trained embeddings
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/trained_model/entity_embedding__embedding_transE_quad.npy')
+entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
 
 #min_max_scaler = preprocessing.MinMaxScaler()
 #entity_embedding = pd.DataFrame(min_max_scaler.fit_transform(entity_embedding))
-relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/trained_model/relation_embedding__embedding_transE_quad.npy')
+relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/relation_embedding.npy')
 #Read the dictionary for original text
-entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/entities.dict', header=None)
+entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/entities.dict', header=None)
 #entity_to_id= entity_to_id[[1, 0]]
 
 #entity_to_id = pd.DataFrame(entity_to_id.T)
 
-relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/mapped/relations.dict', header=None)
+relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/relations.dict', header=None)
 #relation_to_id= relation_to_id[[1, 0]]
 
 entity_embedding = pd.DataFrame(entity_embedding)
-stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago3_10/time_category_wise_entity.pkl')
+stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
 
 #Best indicated types
 #'/education/educational_institution', '/book/author', '/film/film'
