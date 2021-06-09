@@ -250,16 +250,22 @@ def mapped_id_to_original_triples(triples, entity_to_id, rel_to_id):
 # for wiki data
 # data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
 # save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
+#for yago
+data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5'
+save_data_dir = 'result'
+
 #for dbpedia data
-data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata'
-save_data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata/result'
+# data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata'
+# save_data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata/result'
+
 save_data_dir = os.path.join(data_dir,save_data_dir)
 #for wikipedia data
 # train_data_dir = os.path.join(data_dir, 'wikidata.txt')
 
 #for dbpedia data
-train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
-
+# train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
+#for yago
+train_data_dir = os.path.join(data_dir, 'yagoUpdated.txt')
 #for wikidata data
 # quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str)
 #for dbpedia data
@@ -283,7 +289,7 @@ write_dic(time_to_id ,time2id)
 write_dic(location_to_id,loc2id)
 
 train_pos, test_pos = train_test_split(quadropoles, test_size=0.2)
-base_path = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata'
+base_path = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5'
 entity_to_id = pd.read_table(os.path.join(base_path,'entities.dict'), header=None, dtype=str)
 rel_to_id = pd.read_table(os.path.join(base_path,'relations.dict'), header=None, dtype=str)
 time_to_id = pd.read_table(os.path.join(base_path,'times.dict'), header=None, dtype=str)

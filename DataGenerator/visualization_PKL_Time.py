@@ -3,10 +3,14 @@ import pickle
 import  numpy as np
 import seaborn as sns
 entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
-times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/times.dict', header=None)
-fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yago.txt', header=None)
-fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
-times = times.loc[(times[1]>=1000) & (times[1]<=2022)].reset_index(drop=True)
+times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/times.dict', header=None,dtype=float)
+fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yagoUpdated.txt', header=None)
+# fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
+#for mojtauba's changes
+fifthopole_df.columns = ['subject', 'predicate', 'object','location', 'time']
+
+# times = times.loc[(times[1]>=1000) & (times[1]<=2022)].reset_index(drop=True)
+times = times.loc[(times[1]>=1909) & (times[1]<=2012)].reset_index(drop=True)
 time_min = times[1].min()
 time_max = times[1].max()
 
@@ -15,7 +19,8 @@ time_max = times[1].max()
 range_start = time_min
 df_time_category = pd.DataFrame()
 while range_start<=time_max:
-    range_end = range_start + 100
+    # range_end = range_start + 100
+    range_end = range_start + 10
     df_time_category = df_time_category.append(pd.DataFrame(np.array([range_start, range_end])).T)
     range_start = range_end + 1
     #print(i)

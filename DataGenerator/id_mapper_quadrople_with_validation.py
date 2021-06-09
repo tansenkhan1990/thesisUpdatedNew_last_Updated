@@ -14,13 +14,15 @@ def create_mappings(quadropoles):
       """
     entities = np.unique(np.ndarray.flatten(np.concatenate([quadropoles[:, 0:1], quadropoles[:, 2:3]])))
     relations = np.unique(np.ndarray.flatten(quadropoles[:, 1:2]).tolist())
-    time = np.unique(np.ndarray.flatten(quadropoles[:, 3:4]).tolist())
-    location =  np.unique(np.ndarray.flatten(quadropoles[:, 4:5]).tolist())
+    # time = np.unique(np.ndarray.flatten(quadropoles[:, 3:4]).tolist())
+    # location =  np.unique(np.ndarray.flatten(quadropoles[:, 4:5]).tolist())
+    location = np.unique(np.ndarray.flatten(quadropoles[:, 3:4]).tolist())
+    time = np.unique(np.ndarray.flatten(quadropoles[:, 4:5]).tolist())
     entity_to_id = {value: key for key, value in enumerate(entities)}
     rel_to_id = {value: key for key, value in enumerate(relations)}
-    time_to_id = {value: key for key, value in enumerate(time)}
     location_to_id = {value: key for key, value in enumerate(location)}
-    return entity_to_id, rel_to_id, time_to_id, location_to_id
+    time_to_id = {value: key for key, value in enumerate(time)}
+    return entity_to_id, rel_to_id,location_to_id, time_to_id
 
 def create_mapped_triples(triples, entity_to_id=None, rel_to_id=None):
     """
@@ -150,7 +152,7 @@ def original_id_to_triples(triples, entity_to_id, rel_to_id):
     original_triples = np.c_[sub, rel, obj]
     return pd.DataFrame(original_triples)
 
-def original_id_to_quadropoles_str(quadropoles, entity_to_id, rel_to_id, time_to_id, location_to_id):
+def original_id_to_quadropoles_str(quadropoles, entity_to_id, rel_to_id,location_to_id, time_to_id):
     """
     :param
 
@@ -171,17 +173,19 @@ def original_id_to_quadropoles_str(quadropoles, entity_to_id, rel_to_id, time_to
     location = []
     entity_to_id = dict(zip(entity_to_id[1], entity_to_id[0]))
     rel_to_id = dict(zip(rel_to_id[1], rel_to_id[0]))
-    time_to_id = dict(zip(time_to_id[1], time_to_id[0]))
     location_to_id = dict(zip(location_to_id[1], location_to_id[0]))
+    time_to_id = dict(zip(time_to_id[1], time_to_id[0]))
+
 
     for i in range(len(quadropoles)):
         sub.append(entity_to_id[quadropoles[i][0]])
         rel.append(rel_to_id[quadropoles[i][1]])
         obj.append(entity_to_id[quadropoles[i][2]])
-        time.append(time_to_id[quadropoles[i][3]])
-        location.append(location_to_id[quadropoles[i][4]])
+        location.append(location_to_id[quadropoles[i][3]])
+        time.append(time_to_id[quadropoles[i][4]])
 
-    original_quadropoles = np.c_[sub, rel, obj, time ,location]
+
+    original_quadropoles = np.c_[sub, rel, obj,location, time ]
     return pd.DataFrame(original_quadropoles)
 
 def original_id_to_triples_str(triples, entity_to_id, rel_to_id):
@@ -251,7 +255,7 @@ def mapped_id_to_original_triples(triples, entity_to_id, rel_to_id):
 # data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
 # save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
 #for yago dataset
-data_dir = 'dataset/yago5'
+data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5'
 save_data_dir = 'result'
 
 #for dbpedia data
@@ -266,16 +270,17 @@ save_data_dir = os.path.join(data_dir,save_data_dir)
 # train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
 
 #for yago
-train_data_dir = os.path.join(data_dir, 'yago.txt')
+train_data_dir = os.path.join(data_dir, 'yagoUpdated.txt')
 
 #for wikidata data
 # quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str)
+
 #for dbpedia data
 quadropoles = pd.read_csv(train_data_dir, header=None, sep='\t', dtype=str)
 quadropoles = quadropoles.dropna(how='any',axis=0)
 
 #train_pos, test_pos = train_test_split(pos_triples, test_size=0.2)
-entity_to_id, rel_to_id, time_to_id, location_to_id = create_mappings(np.array(quadropoles))
+entity_to_id, rel_to_id, location_to_id, time_to_id = create_mappings(np.array(quadropoles))
 ent2id = dict((v,k) for k,v in entity_to_id.items())
 rel2id = dict((v,k) for k,v in rel_to_id.items())
 time2id = dict((v,k) for k,v in time_to_id.items())
@@ -291,23 +296,22 @@ write_dic(time_to_id ,time2id)
 write_dic(location_to_id,loc2id)
 
 #new function for tran validate and test
-# train_pos, test_pos = train_test_split(quadropoles, test_size=0.15)
-train_pos, valid_pos, test_pos = np.split(quadropoles.sample(frac=1), [int(.6*len(quadropoles)), int(.8*len(quadropoles))])
-base_path = 'dataset/yago5'
+train_pos, test_pos = train_test_split(quadropoles, test_size=0.15)
+# train_pos, valid_pos, test_pos = np.split(quadropoles.sample(frac=1), [int(.6*len(quadropoles)), int(.8*len(quadropoles))])
+base_path = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5'
 entity_to_id = pd.read_table(os.path.join(base_path,'entities.dict'), header=None, dtype=str)
 rel_to_id = pd.read_table(os.path.join(base_path,'relations.dict'), header=None, dtype=str)
 time_to_id = pd.read_table(os.path.join(base_path,'times.dict'), header=None, dtype=str)
 location_to_id = pd.read_table(os.path.join(base_path,'locations.dict'), header=None, dtype=str)
 
-train = original_id_to_quadropoles_str(train_pos, entity_to_id, rel_to_id, time_to_id, location_to_id)
-test = original_id_to_quadropoles_str(test_pos, entity_to_id, rel_to_id, time_to_id, location_to_id)
-valid = original_id_to_quadropoles_str(valid_pos, entity_to_id, rel_to_id, time_to_id, location_to_id)
+train = original_id_to_quadropoles_str(train_pos, entity_to_id, rel_to_id, location_to_id, time_to_id)
+test = original_id_to_quadropoles_str(test_pos, entity_to_id, rel_to_id, location_to_id, time_to_id)
+# valid = original_id_to_quadropoles_str(valid_pos, entity_to_id, rel_to_id, time_to_id, location_to_id)
 
 train_save_dir = os.path.join(save_data_dir, 'train.txt')
 test_save_dir = os.path.join(save_data_dir, 'test.txt')
-valid_save_dir = os.path.join(save_data_dir, 'valid.txt')
 write_to_txt_file(train_save_dir, np.array(train))
 write_to_txt_file(test_save_dir, np.array(test))
-write_to_txt_file(valid_save_dir, np.array(valid))
+
 
 
