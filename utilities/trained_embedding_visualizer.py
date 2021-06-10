@@ -73,7 +73,10 @@ entity_embedding = pd.DataFrame(entity_embedding)
 #for time
 # stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
 #for dbpedia
-stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/time_category_wise_entity.pkl')
+#time wise
+# stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/time_category_wise_entity.pkl')
+#for location
+stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/location_category_wise_entity.pkl')
 #for locations
 # stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/location_category_wise_entity.pkl')
 
