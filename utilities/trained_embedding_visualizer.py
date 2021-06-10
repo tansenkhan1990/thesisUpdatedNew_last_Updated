@@ -71,9 +71,9 @@ relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpd
 
 entity_embedding = pd.DataFrame(entity_embedding)
 #for time
-#stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
+stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
 #for locations
-stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/location_category_wise_entity.pkl')
+# stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/location_category_wise_entity.pkl')
 
 #Best indicated types
 #'/education/educational_institution', '/book/author', '/film/film'
@@ -113,7 +113,7 @@ checkIfDuplicates_1(total_ids)
 dim_reduced = entity_embedding.loc[total_ids]
 original_index = dim_reduced.index
 
-tsne = TSNE(n_components=2, verbose=1, perplexity=10, n_iter=1000)
+tsne = TSNE(n_components=2, verbose=1, perplexity=100, n_iter=1000)
 tsne_result = tsne.fit_transform(dim_reduced)
 
 tsne_df = pd.DataFrame()

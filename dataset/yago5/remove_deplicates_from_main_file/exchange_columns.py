@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import  numpy as np
-dataset = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yago.txt',header=None, dtype=str)
+dataset = pd.read_table('/home/tansen/my_files/thesisUpdatedNew/dbpediadata/result/train',header=None, dtype=str)
 
 def write_to_txt_file(path, data):
     """
@@ -30,8 +30,8 @@ dataset['temp'] = dataset[3]
 dataset[3] = dataset[4]
 dataset[4] = dataset['temp']
 dataset.drop(columns=['temp'], inplace=True)
-data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5'
+data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5'
 # maindata = pd.read_table(os.path.join(data_dir,'yagoUpdated.txt'),header= None, dtype=str)
 data = np.array(dataset).astype(str)
 # data = np.unique(dataset, axis=0)
-write_to_txt_file(os.path.join(data_dir, 'yagoUpdated.txt'), data)
+write_to_txt_file(os.path.join(data_dir, 'dbpediaUpdated.txt'), data)

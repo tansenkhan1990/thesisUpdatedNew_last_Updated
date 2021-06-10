@@ -4,7 +4,7 @@ import  numpy as np
 import seaborn as sns
 entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
 times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/times.dict', header=None,dtype=float)
-locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/locations.dict', header=None,dtype=str)
+# locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/locations.dict', header=None,dtype=str)
 fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yagoUpdated.txt', header=None)
 # fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
 #for mojtauba's changes
@@ -40,7 +40,7 @@ df_time_category = df_time_category.reset_index(drop=True)
 #     arr = np.vstack(arr,temp)
 
 entities_in_time_category = pd.DataFrame()
-
+# category_time = '1912.0' + '-' + '1932.0'
 for i in df_time_category.index:
    #print(df_time_category.loc[i,0], df_time_category.loc[i,1])
    start_time_category = df_time_category.loc[i,0]
@@ -54,10 +54,16 @@ for i in df_time_category.index:
    #print(entities_list_object)
    joint_list_sub_obj = np.unique([*entities_list_subject,*entities_list_object])
    #print(small_df)
+   #for fixed time category
+   ##########
+   print('######time category#####')
+
    category_time = str(start_time_category) + '-' + str(end_time_category)
+   print(category_time)
    entities_per_category_time = np.array([category_time, joint_list_sub_obj])
    entities_in_time_category = entities_in_time_category.append(pd.DataFrame(entities_per_category_time).T)
    #print(joint_list_sub_obj)
    print('#############################')
 entities_in_time_category.columns = ['category', 'matched_entities']
+# new_time_category = entities_in_time_category['']
 entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')

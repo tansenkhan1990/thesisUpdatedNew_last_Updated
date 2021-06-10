@@ -4,10 +4,11 @@ import  pandas as pd
 import matplotlib.ticker as ticker
 import numpy as np
 
-df = pd.read_table('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt', header=None)
-data_dbpedia = df.groupby([3, 4], ).agg({1: ['count']}).reset_index()
-data_dbpedia.columns = ['year', 'country', 'feature']
+df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/train', header=None)
 
+data_dbpedia = df.groupby([4, 3], ).agg({1: ['count']}).reset_index()
+data_dbpedia.columns = ['year', 'country', 'feature']
+data_dbpedia = data_dbpedia[(data_dbpedia.year > 1000) & (data_dbpedia.year<2022)]
 
 interval_size=100
 sns.lmplot(x="year", y="feature", data=data_dbpedia, fit_reg=False)

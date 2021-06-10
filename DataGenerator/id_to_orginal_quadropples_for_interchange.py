@@ -74,12 +74,12 @@ def mapped_id_to_original_fifthopoles(fifthopoles, entity_to_id, rel_to_id, loc_
 # save_data_dir = 'mapped'
 
 #for wikipedia data
-# data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
+# data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result'
 #for dbpedia data
-data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result'
+data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result'
 save_data_dir = 'mapped'
-train = pd.read_table(os.path.join(data_dir, 'train'), header=None)
-test = pd.read_table(os.path.join(data_dir, 'test'), header=None)
+train = pd.read_table(os.path.join(data_dir, 'train.txt'), header=None)
+test = pd.read_table(os.path.join(data_dir, 'test.txt'), header=None)
 entity_to_id = pd.read_table(os.path.join(data_dir, 'entities.dict'), header=None)
 rel_to_id = pd.read_table(os.path.join(data_dir, 'relations.dict'), header=None)
 loc_to_id = pd.read_table(os.path.join(data_dir, 'locations.dict'), header=None)
@@ -98,5 +98,5 @@ test_original = mapped_id_to_original_fifthopoles(test, entity_to_id, rel_to_id,
 # test_original.to_csv('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/test_original.txt', index=False, header=None, sep='\t')
 
 #for yago5
-train_original.to_csv('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/train_original.txt', index=False, header=None, sep = '\t')
-test_original.to_csv('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/test_original.txt', index=False, header=None, sep='\t')
+train_original.to_csv('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/train_orginal', index=False, header=None, sep = '\t')
+test_original.to_csv('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/test_orginal', index=False, header=None, sep='\t')

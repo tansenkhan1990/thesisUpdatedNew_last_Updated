@@ -255,7 +255,7 @@ def mapped_id_to_original_triples(triples, entity_to_id, rel_to_id):
 # data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata'
 # save_data_dir = '/home/tansen/my_files/thesisUpdatedNew/dataset/wikidata/result'
 #for yago dataset
-data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5'
+data_dir = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5'
 save_data_dir = 'result'
 
 #for dbpedia data
@@ -270,7 +270,7 @@ save_data_dir = os.path.join(data_dir,save_data_dir)
 # train_data_dir = os.path.join(data_dir, 'dbpedia.txt')
 
 #for yago
-train_data_dir = os.path.join(data_dir, 'yagoUpdated.txt')
+train_data_dir = os.path.join(data_dir, 'dbpediaUpdated.txt')
 
 #for wikidata data
 # quadropoles = pd.read_csv(train_data_dir, header=None, dtype=str)
@@ -298,7 +298,7 @@ write_dic(location_to_id,loc2id)
 #new function for tran validate and test
 train_pos, test_pos = train_test_split(quadropoles, test_size=0.15)
 # train_pos, valid_pos, test_pos = np.split(quadropoles.sample(frac=1), [int(.6*len(quadropoles)), int(.8*len(quadropoles))])
-base_path = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5'
+base_path = '/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5'
 entity_to_id = pd.read_table(os.path.join(base_path,'entities.dict'), header=None, dtype=str)
 rel_to_id = pd.read_table(os.path.join(base_path,'relations.dict'), header=None, dtype=str)
 time_to_id = pd.read_table(os.path.join(base_path,'times.dict'), header=None, dtype=str)

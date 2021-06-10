@@ -2,8 +2,9 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 
-df = pd.read_table('/home/tansen/my_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt', header=None)
-data = df.groupby([3, 4], ).agg({1: ['count']}).reset_index()
+df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/train', header=None)
+
+data = df.groupby([4, 3], ).agg({1: ['count']}).reset_index()
 data.columns = ['year', 'country', 'feature']
 data = data[data.year > 2000]
 #

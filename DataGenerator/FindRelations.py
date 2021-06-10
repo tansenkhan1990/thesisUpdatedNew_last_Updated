@@ -1,7 +1,7 @@
 import numpy as np
 import  pandas as pd
 
-data = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/dbpediadata/result/train_original.txt' , header=None)
+data = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/train' , header=None)
 data = data[[0,1,2]]
 data.columns = ['head','relation','tail']
 unique_relations = data['relation'].unique()
