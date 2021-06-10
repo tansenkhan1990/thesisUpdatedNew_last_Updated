@@ -13,7 +13,7 @@ fifthopole_df.columns = ['subject', 'predicate', 'object','location', 'time']
 new_loc = fifthopole_df.groupby(['location'], ).agg({'subject': ['count']})
 new_loc.columns = ['count']
 new_loc = new_loc.sort_values(by=['count'],ascending=False)
-selected_locations = ['Iraq', 'Belgium', 'Afghanistan','Japan','Lebanon']
+selected_locations = ['Iraq', 'Belgium', 'Afghanistan','Japan','Lebanon','United_States']
 fifthopole_df_specific_locations = fifthopole_df.loc[fifthopole_df['location'].isin(selected_locations)]
 # new_loc =  locations.groupby([1], ).agg({1: ['count']}).reset_index()
 # new_loc.columns = ['country','iteration']

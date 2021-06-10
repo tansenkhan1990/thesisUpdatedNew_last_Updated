@@ -2,16 +2,16 @@ import pandas as pd
 import pickle
 import  numpy as np
 import seaborn as sns
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
-times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/times.dict', header=None,dtype=float)
+entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
+times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/times.dict', header=None,dtype=float)
 # locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/locations.dict', header=None,dtype=str)
-fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yagoUpdated.txt', header=None)
+fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/dbpediaUpdated.txt', header=None)
 # fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
 #for mojtauba's changes
 fifthopole_df.columns = ['subject', 'predicate', 'object','location', 'time']
 
-# times = times.loc[(times[1]>=1000) & (times[1]<=2022)].reset_index(drop=True)
-times = times.loc[(times[1]>=1909) & (times[1]<=2012)].reset_index(drop=True)
+times = times.loc[(times[1]>=1900) & (times[1]<=2022)].reset_index(drop=True)
+# times = times.loc[(times[1]>=1909) & (times[1]<=2012)].reset_index(drop=True)
 # new_loc =  locations.groupby([1], ).agg({1: ['count']}).reset_index()
 # new_loc.columns = ['country','iteration']
 # poko = new_loc[new_loc['iteration'] >1]
@@ -24,8 +24,10 @@ time_max = times[1].max()
 range_start = time_min
 df_time_category = pd.DataFrame()
 while range_start<=time_max:
-    # range_end = range_start + 100
-    range_end = range_start + 20
+    range_end = range_start + 10
+    if range_end>=time_max:
+        break
+    # range_end = range_start + 20
     df_time_category = df_time_category.append(pd.DataFrame(np.array([range_start, range_end])).T)
     range_start = range_end + 1
     #print(i)
@@ -66,4 +68,4 @@ for i in df_time_category.index:
    print('#############################')
 entities_in_time_category.columns = ['category', 'matched_entities']
 # new_time_category = entities_in_time_category['']
-entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
+entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/time_category_wise_entity.pkl')
