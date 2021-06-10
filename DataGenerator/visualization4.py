@@ -28,20 +28,21 @@ dbpedia = dbpedia[(dbpedia.year > 1000) & (dbpedia.year<2022)]
 x1 = data_yago['year']
 y1 = data_yago['feature']
 
-x2 = dbpedia['year']
-y2 = dbpedia['feature']
+x2 = data_wiki['year']
+y2 = data_wiki['feature']
 
 x3 = dbpedia['year']
 y3 = dbpedia['feature']
 # depict illustration
-plt.scatter(x1, y1)
 
-# plt.scatter(x2, y2)
-
+plt.scatter(x2, y2)
 plt.scatter(x3, y3)
 
+# plt.scatter(x1, y1)
+
+
 # apply legend()
-plt.legend([ 'wiki','dbpedia'])
+plt.legend(['wiki','dbpedia'])
 plt.xlabel('years')
 plt.ylabel('feature')
 plt.show()

@@ -5,17 +5,23 @@ import seaborn as sns
 #For yago
 # entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
 #for Dbpedia
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
+#entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
+#For wiki
+entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/entity_embedding_.npy')
 #for yago
 # times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/times.dict', header=None,dtype=float)
 #for dbpedia
-times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/times.dict', header=None,dtype=float)
+#times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/times.dict', header=None,dtype=float)
+#For Wiki
+times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/times.dict', header=None,dtype=float)
 # locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/locations.dict', header=None,dtype=str)
 #for yago
-fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yagoUpdated.txt', header=None)
+# fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yagoUpdated.txt', header=None)
 # for dbpedia
-fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/dbpediaUpdated.txt', header=None)
-fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
+#fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/dbpediaUpdated.txt', header=None)
+#For Wiki
+fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/wikiUpdated.txt', header=None)
+# fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
 #for mojtauba's changes
 fifthopole_df.columns = ['subject', 'predicate', 'object','location', 'time']
 #for yago5
@@ -32,8 +38,8 @@ df_3 = fifthopole_df.loc[(fifthopole_df['time']>=1910) & (fifthopole_df['time']<
 # df_4 = fifthopole_df.loc[(fifthopole_df['time']>=1933) & (fifthopole_df['time']<=1943)].reset_index(drop=True)
 # df_5 = fifthopole_df.loc[(fifthopole_df['time']>=1955) & (fifthopole_df['time']<=1965)].reset_index(drop=True)
 
-
-#time_dfs = [df_1, df_2, df_3, df_4, df_5]
+#
+# time_dfs = [df_1, df_3, df_4, df_5]
 time_dfs = [df_1, df_2, df_3]
 entities_in_time_category = pd.DataFrame()
 for df in time_dfs:
@@ -49,8 +55,10 @@ entities_in_time_category = entities_in_time_category.reset_index(drop=True)
 
 entities_in_time_category.columns = ['category', 'matched_entities']
 # new_time_category = entities_in_time_category['']
+#For Yago
 # entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
-entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/time_category_wise_entity.pkl')
+# For DBPedia5
+entities_in_time_category.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/time_category_wise_entity.pkl')
 # # times = times.loc[(times[1]>=1900) & (times[1]<=2022)].reset_index(drop=True)
 # times = pd.concat([times1,times2,times3,times4,times5],ignore_index=True)
 # times = times.reset_index(drop=True)

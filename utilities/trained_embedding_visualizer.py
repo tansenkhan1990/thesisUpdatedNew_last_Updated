@@ -55,28 +55,50 @@ def id_to_entity_conversion(entity_id):
     return np.array(entity_converted)
 
 #Read trained embeddings
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
-
+#For dbpedia5
+#entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
+#For Wiki
+entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/entity_embedding_.npy')
+#for Yago5
+# entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
 #min_max_scaler = preprocessing.MinMaxScaler()
 #entity_embedding = pd.DataFrame(min_max_scaler.fit_transform(entity_embedding))
-relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/relation_embedding.npy')
+# For Dbpedia
+#relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/relation_embedding.npy')
+#For Wiki
+relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/relation_embedding.npy')
+#For Yago
+# relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/relation_embedding.npy')
 #Read the dictionary for original text
-entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/entities.dict', header=None)
+#for Dbpedia
+#entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/entities.dict', header=None)
+#For wiki
+entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/entities.dict', header=None)
+#for Yago
+#entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/entities.dict', header=None)
 #entity_to_id= entity_to_id[[1, 0]]
 
 #entity_to_id = pd.DataFrame(entity_to_id.T)
 
-relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/relations.dict', header=None)
+#For Dbpedia
+#relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/relations.dict', header=None)
+#For wiki
+relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/relations.dict', header=None)
+#For Yago
+#relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/relations.dict', header=None)
 #relation_to_id= relation_to_id[[1, 0]]
 
 entity_embedding = pd.DataFrame(entity_embedding)
 #for time
 # stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
 #for dbpedia
-#time wise
-# stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/time_category_wise_entity.pkl')
+#stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/time_category_wise_entity.pkl')
+#For Wiki
+stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/time_category_wise_entity.pkl')
+# For Yago
+#stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
 #for location
-stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/location_category_wise_entity.pkl')
+# stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/location_category_wise_entity.pkl')
 #for locations
 # stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/location_category_wise_entity.pkl')
 
@@ -118,7 +140,7 @@ checkIfDuplicates_1(total_ids)
 dim_reduced = entity_embedding.loc[total_ids]
 original_index = dim_reduced.index
 
-tsne = TSNE(n_components=2, verbose=1, perplexity=50, n_iter=1000)
+tsne = TSNE(n_components=2, verbose=1, perplexity=15, n_iter=1000)
 tsne_result = tsne.fit_transform(dim_reduced)
 
 tsne_df = pd.DataFrame()
