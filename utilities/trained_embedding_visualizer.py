@@ -8,6 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 #from adjustText import adjust_text
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.manifold import TSNE
 
 def unique(sequence):
@@ -55,25 +56,25 @@ def id_to_entity_conversion(entity_id):
     return np.array(entity_converted)
 
 #Read trained embeddings
-#For dbpedia5
-#entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
+#For Wikidata5
+#entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/mapped/trained_model/entity_embedding_.npy')
 #For Wiki
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/entity_embedding_.npy')
+entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/location_embedding_.npy')
 #for Yago5
 # entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
 #min_max_scaler = preprocessing.MinMaxScaler()
 #entity_embedding = pd.DataFrame(min_max_scaler.fit_transform(entity_embedding))
 # For Dbpedia
-#relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/relation_embedding.npy')
+#relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/mapped/trained_model/relation_embedding.npy')
 #For Wiki
-relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/relation_embedding.npy')
+#relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/relation_embedding.npy')
 #For Yago
 # relation_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/relation_embedding.npy')
 #Read the dictionary for original text
 #for Dbpedia
-#entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/entities.dict', header=None)
+#entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/entities.dict', header=None)
 #For wiki
-entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/entities.dict', header=None)
+entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/locations.dict', header=None)
 #for Yago
 #entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/entities.dict', header=None)
 #entity_to_id= entity_to_id[[1, 0]]
@@ -81,9 +82,9 @@ entity_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdat
 #entity_to_id = pd.DataFrame(entity_to_id.T)
 
 #For Dbpedia
-#relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/relations.dict', header=None)
+#relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/relations.dict', header=None)
 #For wiki
-relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/relations.dict', header=None)
+#relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/relations.dict', header=None)
 #For Yago
 #relation_to_id = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/result/relations.dict', header=None)
 #relation_to_id= relation_to_id[[1, 0]]
@@ -92,15 +93,16 @@ entity_embedding = pd.DataFrame(entity_embedding)
 #for time
 # stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
 #for dbpedia
-#stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/time_category_wise_entity.pkl')
+#stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/time_category_wise_entity.pkl')
 #For Wiki
-stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/time_category_wise_entity.pkl')
+# stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/time_category_wise_entity.pkl')
+stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/location_category_wise_entity_latest.pkl')
 # For Yago
 #stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/time_category_wise_entity.pkl')
-#for location
-# stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/location_category_wise_entity.pkl')
-#for locations
-# stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/location_category_wise_entity.pkl')
+#dbpedia for location
+#stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/location_category_wise_entity.pkl')
+# yago for locations
+#stats = pd.read_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/location_category_wise_entity.pkl')
 
 #Best indicated types
 #'/education/educational_institution', '/book/author', '/film/film'
@@ -140,7 +142,8 @@ checkIfDuplicates_1(total_ids)
 dim_reduced = entity_embedding.loc[total_ids]
 original_index = dim_reduced.index
 
-tsne = TSNE(n_components=2, verbose=1, perplexity=15, n_iter=1000)
+tsne = TSNE(n_components=2, verbose=1, perplexity=50, n_iter=1000)
+#tsne = PCA(n_components=2, svd_solver='full')
 tsne_result = tsne.fit_transform(dim_reduced)
 
 tsne_df = pd.DataFrame()
@@ -160,6 +163,7 @@ tsne_df['original_entity'] = id_to_entity_conversion(tsne_df['original_index'].v
 # fig = px.scatter_3d(tsne_df, x='tsne-one', y='tsne-two', z='tsne-three',
 #               color='type')
 # fig.show()
+
 c_palate = {}
 colors = ['tab:blue','tab:orange','tab:green','tab:red',
           'tab:purple','tab:brown', 'tab:pink','tab:gray','tab:olive','c'
@@ -170,14 +174,25 @@ for i,v in zip(indicated_types, colors):
     c_palate[i] = v
 
 
-plt.figure(figsize=(16,16))
+#plt.figure(figsize=(16,16))
+plt.xlabel('tsne-one', fontsize=20)
+plt.ylabel('tsne-two', fontsize=20)
+
 plot = sns.scatterplot(
     x="tsne-one", y="tsne-two",
     hue='type',
     data=tsne_df,
     palette=c_palate,
     legend="full",
-    alpha=0.8
+    alpha=0.8,
+    s= 300
 )
-plt.setp(plot.get_legend().get_texts(), fontsize='15')
+
+
+plt.setp(plot.get_legend().get_texts(), fontsize='10')
+plt.xlabel('tsne_1')
+plt.ylabel('tsne_2')
+plt.locator_params(axis='y', nbins=5)   # y-axis
+
+plt.locator_params(axis='x', nbins=5)  # x-axis
 plt.show()

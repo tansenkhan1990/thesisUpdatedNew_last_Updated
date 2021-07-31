@@ -8,9 +8,14 @@ import seaborn as sns
 # fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/yagoUpdated.txt', header=None)
 # fifthopole_df.columns = ['subject', 'predicate', 'object', 'time', 'location']
 #dbpedia
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
-locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/result/locations.dict', header=None,dtype=str)
-fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/dbpediaUpdated.txt', header=None)
+# entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/mapped/trained_model/entity_embedding_.npy')
+# locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/locations.dict', header=None,dtype=str)
+# fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/dbpediaUpdated.txt', header=None)
+
+#wiki
+entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/entity_embedding_.npy')
+locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/locations.dict', header=None,dtype=str)
+fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/wikiUpdated.txt', header=None)
 
 #for mojtauba's changes
 fifthopole_df.columns = ['subject', 'predicate', 'object','location', 'time']
@@ -19,7 +24,7 @@ fifthopole_df.columns = ['subject', 'predicate', 'object','location', 'time']
 new_loc = fifthopole_df.groupby(['location'], ).agg({'subject': ['count']})
 new_loc.columns = ['count']
 new_loc = new_loc.sort_values(by=['count'],ascending=False)
-selected_locations = ['Iraq', 'Belgium', 'Afghanistan','Japan','Lebanon']
+selected_locations = ['United_Kingdom','Germany','Sapin','Poland']
 fifthopole_df_specific_locations = fifthopole_df.loc[fifthopole_df['location'].isin(selected_locations)]
 # new_loc =  locations.groupby([1], ).agg({1: ['count']}).reset_index()
 # new_loc.columns = ['country','iteration']
@@ -42,4 +47,4 @@ df = df.reset_index(drop=True)
 
 
 df.columns = ['category', 'matched_entities']
-df.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/DBPedia5/location_category_wise_entity.pkl')
+df.to_pickle('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/location_category_wise_entity.pkl')

@@ -2,7 +2,7 @@
 #gamma=(1 10 20 30 40 50)
 #temperature=1
 #lrs=(0.01 0.05 0.1)
-#batch_sizes=(1024)
+batch_sizes=(1024)
 #negs=(10 100 1000)
 dims=(32 100)
 gamma=(1 5 20)
@@ -10,7 +10,7 @@ temperature = 0
 lrs=(0.00002 0.000002)
 batch_sizes=(512)
 negs=(10 500)
-models=("ComplEx_quad")
+models=("transE_quad")
 regularization=(0 0.00001 0.0005 0.5 5)
 #models=("TransE")
 dataset="yago3_10/mapped"
@@ -49,10 +49,10 @@ for d in "${dims[@]}";do
 #               available_mem=${available_mem//[^0-9]/}
 #               echo "available mem is: $available_mem"
 #               if [[ ${available_mem} -gt 1980 ]];then
-                command="python train_version_2.py --name $model --dim $d --lr $lr --neg_sample $neg --gamma $g --temp $temperature --regul True --max_epoch $max_steps  --fifthopole True" --batch_size $b  --data_dir $DATA_PATH
+                command="python train_version_2.py --name $model --dim $d --lr $lr --neg_sample $neg --gamma $g --temp $temperature --regul True --max_epoch $max_steps  --fifthopole True --batch_size $b  --data_dir $DATA_PATH
 
                 echo  "following command is executed"
-                echo  $command >> ../hyperparameters_command/commands.txt
+                echo  $command >> commands.txt
 #                   executed_flag="true"
 #                   sleep 15
 #                   break
