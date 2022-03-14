@@ -59,7 +59,7 @@ def id_to_entity_conversion(entity_id):
 #For Wikidata5
 #entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/mapped/trained_model/entity_embedding_.npy')
 #For Wiki
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/location_embedding_.npy')
+entity_embedding = np.load('/dataset/Wikidata5/result/mapped/trained_model/old2/location_embedding_.npy')
 #for Yago5
 # entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/yago5/mapped/trained_model/entity_embedding_.npy')
 #min_max_scaler = preprocessing.MinMaxScaler()

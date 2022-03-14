@@ -2,7 +2,7 @@ import pandas as pd
 import pickle
 import  numpy as np
 import seaborn as sns
-entity_embedding = np.load('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped/trained_model/entity_embedding_.npy')
+entity_embedding = np.load('/dataset/Wikidata5/result/mapped/trained_model/old2/entity_embedding_.npy')
 times = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/times.dict', header=None,dtype=float)
 locations = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/locations.dict', header=None,dtype=str)
 fifthopole_df = pd.read_table('/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/wikiUpdated.txt', header=None)

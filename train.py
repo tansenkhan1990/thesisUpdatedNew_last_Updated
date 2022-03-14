@@ -485,7 +485,7 @@ def main():
     train( name='transE_quad', model = model,dim=dim, lr=lr, negsample_num=negsample_num,
         gamma=gamma, temp=temp, lam  = lam, lam2=lam2, lam3 =lam3, lam4=lam4,
         regul=False, max_epoch= 200,
-        test_mode=False, saving=True, fifthopole = True, batch_size=2750, data_dir='dataset/yago3_10/mapped')
+        test_mode=False, saving=True, fifthopole = True, batch_size=2750, data_dir='/home/tansen/my_files/thesis_new_files/thesisUpdatedNew/dataset/Wikidata5/result/mapped')
 
 
    ##############################dismult_quad#########################
